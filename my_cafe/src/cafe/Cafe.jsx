@@ -7,7 +7,7 @@ const cafe = () => {
             <div class="navigation-items">
                 <a href="#">COFFEE</a>
                 <a href="#">TEA</a>
-                <a href="#">MENU</a>
+                <a href="#">MExzxcvzxvNU</a>
 
             </div>
         </div>
