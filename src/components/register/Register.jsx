@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 const Register = () => {
-    const navigate = useNavigate(); //ใช้นำทาง ปุ่มกลับ
+    const navigate = useNavigate(); // ใช้สำหรับนำทางปุ่มกลับ
 
     const [formState, setFormState] = useState({
         id: '',
@@ -10,10 +11,6 @@ const Register = () => {
         lastName: '',
         password: ''
     });
-
-    const handleLoginClick = () => {
-        navigate('/login');   //ถ้าใช้อันนี้จะกลับไปหน้า login
-    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,8 +22,18 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission
-        console.log(formState);
+        Axios.post("http://localhost:8085/api/v1/employee/register", formState)
+            .then(response => {
+                alert(JSON.stringify(response.data));
+            })
+            .catch(error => {
+                console.error("Error during registration:", error);
+                alert("Registration failed. Please try again.");
+            });
+    };
+
+    const handleLoginClick = () => {
+        navigate('/login'); // นำทางไปหน้า login
     };
 
     return (
