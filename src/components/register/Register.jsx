@@ -12,16 +12,6 @@ const Register = () => {
         password: ''
     });
 
-    const onClickRegister = () => {
-        Axios.post("http://localhost:8085/api/v1/employee/register", formState).then(response=>{
-            alert(JSON.stringify(response.data))
-        })
-    };
-
-    const handleLoginClick = () => {
-        navigate('/login'); // นำทางไปหน้า login
-    };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormState({
@@ -32,7 +22,18 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onClickRegister(); // เรียกใช้ฟังก์ชันลงทะเบียนเมื่อกด submit
+        Axios.post("http://localhost:8085/api/v1/employee/register", formState)
+            .then(response => {
+                alert(JSON.stringify(response.data));
+            })
+            .catch(error => {
+                console.error("Error during registration:", error);
+                alert("Registration failed. Please try again.");
+            });
+    };
+
+    const handleLoginClick = () => {
+        navigate('/login'); // นำทางไปหน้า login
     };
 
     return (
