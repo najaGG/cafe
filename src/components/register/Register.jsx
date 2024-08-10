@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 const Register = () => {
-    const navigate = useNavigate(); //ใช้นำทาง ปุ่มกลับ
+    const navigate = useNavigate(); // ใช้สำหรับนำทางปุ่มกลับ
 
     const [formState, setFormState] = useState({
         id: '',
@@ -11,8 +12,14 @@ const Register = () => {
         password: ''
     });
 
+    const onClickRegister = () => {
+        Axios.post("http://localhost:8085/api/v1/employee/register", formState).then(response=>{
+            alert(JSON.stringify(response.data))
+        })
+    };
+
     const handleLoginClick = () => {
-        navigate('/login');   //ถ้าใช้อันนี้จะกลับไปหน้า login
+        navigate('/login'); // นำทางไปหน้า login
     };
 
     const handleChange = (e) => {
@@ -25,8 +32,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission
-        console.log(formState);
+        onClickRegister(); // เรียกใช้ฟังก์ชันลงทะเบียนเมื่อกด submit
     };
 
     return (
