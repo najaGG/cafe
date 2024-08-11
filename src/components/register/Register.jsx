@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
 const Register = () => {
-    const navigate = useNavigate(); // ใช้สำหรับนำทางปุ่มกลับ
+    const navigate = useNavigate();
 
     const [formState, setFormState] = useState({
         id: '',
-        firstName: '',
-        lastName: '',
+        firstName: '',  
+        lastName: '',   
         password: ''
     });
 
@@ -33,41 +33,42 @@ const Register = () => {
     };
 
     const handleLoginClick = () => {
-        navigate('/login'); // นำทางไปหน้า login
+        navigate('/login');
     };
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <h1>Register</h1>
-                <label htmlFor="idname">ID:</label><br />
+                <label htmlFor="id">ID:</label><br />
                 <input 
                     type="text" 
-                    id="idname" 
+                    id="id" 
                     name="id" 
                     value={formState.id} 
                     onChange={handleChange} 
                 /><br />
-                <label htmlFor="fname">First name:</label><br />
+                <label htmlFor="firstname">First name:</label><br />
                 <input 
                     type="text" 
-                    id="fname" 
-                    name="firstName" 
+                    id="firstname" 
+                    name="firstName"
                     value={formState.firstName} 
                     onChange={handleChange} 
                 /><br />
-                <label htmlFor="lname">Last name:</label><br />
+                <label htmlFor="lastname">Last name:</label><br />
                 <input 
                     type="text" 
-                    id="lname" 
+                    id="lastname" 
                     name="lastName" 
                     value={formState.lastName} 
                     onChange={handleChange} 
                 /><br />
-                <label htmlFor="pname">Password:</label><br />
+
+                <label htmlFor="password">Password:</label><br />
                 <input 
                     type="password" 
-                    id="pname" 
+                    id="password" 
                     name="password" 
                     value={formState.password} 
                     onChange={handleChange} 
