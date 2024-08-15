@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-
+import WebSocketComponent from '../WebSocketComponent';
 const Register = () => {
     const navigate = useNavigate();
 
@@ -40,14 +40,8 @@ const Register = () => {
         <div>
             <form onSubmit={handleSubmit}>
                 <h1>Register</h1>
-                <label htmlFor="id">ID:</label><br />
-                <input 
-                    type="text" 
-                    id="id" 
-                    name="id" 
-                    value={formState.id} 
-                    onChange={handleChange} 
-                /><br />
+
+                <WebSocketComponent />
                 <label htmlFor="firstname">First name:</label><br />
                 <input 
                     type="text" 
