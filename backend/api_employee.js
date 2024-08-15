@@ -1,12 +1,14 @@
 const express = require("express");
-const router = express.Router()
+const router = express.Router();
+const employee = require("./models/employee")
 
 router.get("/login", (req, res) => {
     res.json({ result: "login" });
 });
 
 router.post("/register", (req, res) => {
-    const { id, firstName, lastName, password } = req.body;
+    const { id , firstName , lastName, password } = req.body
+    employee.create(req.body)
     res.json({ result: "register", id, firstName, lastName, password });
 });
 
