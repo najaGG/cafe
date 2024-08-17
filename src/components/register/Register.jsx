@@ -41,14 +41,16 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
                 <h1>Register</h1>
 
-                <WebSocketComponent />
-                <label htmlFor="firstname">First name:</label><br />
+                <WebSocketComponent onDataReceived={handleWebSocketData} />
+                
+                <label htmlFor="id">ID:</label><br />
                 <input 
                     type="text" 
-                    id="firstname" 
-                    name="firstName"
-                    value={formState.firstName} 
+                    id="id" 
+                    name="id"
+                    value={formState.id} 
                     onChange={handleChange} 
+                    readOnly // You might want to make this field read-only
                 /><br />
                 <label htmlFor="lastname">Last name:</label><br />
                 <input 
