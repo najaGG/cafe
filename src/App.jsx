@@ -1,27 +1,26 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
-import Login from './components/login/Login'
-import Register from './components/register/Register';
+import Cafe from './components/cafehead/Cafe'
 
+import Pagehot from './components/page/Pagehot';
+import Pageice from './components/page/Pageice';
+import Pagecake from './components/page/Pagecake';
+import Pagecast from './components/page/Pagecast';
 function App() {
+  const [count, setCount] = useState(0)
 
   return (
-    <>
-  
-      <Router>
-            <div>
-                <Routes>
-                    <Route path="/" element={<Navigate to="/login" replace/>} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/login" element={<Login />} />
-                    
-                  </Routes>
-            </div>
-        </Router>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Pagehot />} />
+        <Route path="/ice" element={<Pageice />} />
+        <Route path="/cake" element={<Pagecake />} />
+        <Route path="/cast" element={<Pagecast />} />
+      </Routes>
+    </Router>
+
   )
 }
 
