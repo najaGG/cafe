@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import './Register.css'
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import WebSocketComponent from '../WebSocketComponent';
+
 const Register = () => {
     const navigate = useNavigate();
 
     const [formState, setFormState] = useState({
-        id: '',
+        rfid: '',
         firstName: '',  
         lastName: '',   
         password: ''
@@ -20,6 +22,13 @@ const Register = () => {
         });
     };
 
+    const handleWebSocketData = (data) => {
+        setFormState((prevState) => ({
+            ...prevState,
+            id: data 
+        }));
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         Axios.post("http://localhost:8085/api/v1/employee/register", formState)
@@ -28,7 +37,7 @@ const Register = () => {
             })
             .catch(error => {
                 console.error("Error during registration:", error);
-                alert("Registration failed. Please try again.");
+                alert("Register fail try again");
             });
     };
 
@@ -38,21 +47,32 @@ const Register = () => {
 
     return (
         <div>
+            <div class="main">
             <form onSubmit={handleSubmit}>
-                <h1>Register</h1>
+                <h1>ลงทะเบียน</h1>
 
                 <WebSocketComponent onDataReceived={handleWebSocketData} />
                 
-                <label htmlFor="id">ID:</label><br />
+                <label htmlFor="rfid">RFID:</label><br />
                 <input 
                     type="text" 
-                    id="id" 
-                    name="id"
+                    id="rfid" 
+                    name="rfid"
                     value={formState.id} 
                     onChange={handleChange} 
-                    readOnly // You might want to make this field read-only
+                    readOnly 
                 /><br />
-                <label htmlFor="lastname">Last name:</label><br />
+
+                <label htmlFor="firstname">ชื่อ:</label><br />
+                <input 
+                    type="text" 
+                    id="firstname" 
+                    name="firstName"
+                    value={formState.firstName} 
+                    onChange={handleChange} 
+                /><br />
+                
+                <label htmlFor="lastname">นามสกุล:</label><br />
                 <input 
                     type="text" 
                     id="lastname" 
@@ -61,7 +81,7 @@ const Register = () => {
                     onChange={handleChange} 
                 /><br />
 
-                <label htmlFor="password">Password:</label><br />
+                <label htmlFor="password">รหัสผ่าน:</label><br />
                 <input 
                     type="password" 
                     id="password" 
@@ -69,12 +89,14 @@ const Register = () => {
                     value={formState.password} 
                     onChange={handleChange} 
                 /><br />
-                <button type="submit">Register</button>
+                
+                <button type="submit">ลงทะเบียน</button>
                 <br />
                 <button type="button" className="btn btn-light" onClick={handleLoginClick}>
-                    Go to login
+                    ไปที่เข้าสู่ระบบ
                 </button>
             </form>
+            </div>
         </div>
     );
 };

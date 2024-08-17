@@ -8,6 +8,7 @@ import Pagehot from './components/page/Pagehot';
 import Pageice from './components/page/Pageice';
 import Pagecake from './components/page/Pagecake';
 import Pagecast from './components/page/Pagecast';
+import Register from './components/register/Register';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/ice" element={<Pageice />} />
         <Route path="/cake" element={<Pagecake />} />
         <Route path="/cast" element={<Pagecast />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
 

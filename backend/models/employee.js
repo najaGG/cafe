@@ -4,7 +4,8 @@ const sequelize = require("../db_instance");
 
 const employee = sequelize.define("employee", {
     id: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
         allowNull: false,
         primaryKey: true, 
     },
@@ -17,6 +18,10 @@ const employee = sequelize.define("employee", {
         allowNull: false,
     },
     password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    rfid:{
         type: Sequelize.STRING,
         allowNull: false,
     },
