@@ -30,8 +30,8 @@ const employee = sequelize.define("employee", {
         defaultValue: "normal",
     },
 }, {
-    // Additional options if needed
-    timestamps: false // ปิดการใช้งานฟิลด์ createdAt และ updatedAt
+    
+    timestamps: false 
 });
 
 (async () => {

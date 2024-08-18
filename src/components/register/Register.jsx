@@ -42,14 +42,14 @@ const Register = () => {
                 if (response.data.exists) {
                     toast.error("RFID นี้ถูกใช้ไปแล้ว กรุณาใช้บัตรอื่น",{ autoClose: 1000 });
                 } else {
-                    // ถ้า RFID ไม่ซ้ำ ให้ดำเนินการลงทะเบียน
+                    
                     Axios.post("http://localhost:8085/api/v1/employee/register", formState)
                         .then(response => {
                             toast.success("ลงทะเบียนสำเร็จ",{ autoClose: 1000 });
                         })
                         .catch(error => {
                             console.error("Error during registration:", error);
-                            toast.error("Register fail try again",{ autoClose: 1000 });
+                            toast.error("ลงทะเบียนไม่สำเร็จกรุณาลงใหม่",{ autoClose: 1000 });
                         });
                 }
             })
