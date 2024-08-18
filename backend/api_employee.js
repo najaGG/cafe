@@ -7,7 +7,7 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-    const { id , firstName , lastName, password } = req.body
+    const { rfid , firstName , lastName, password } = req.body
     employee.create(req.body)
     res.json({ result: "register", rfid, firstName, lastName, password });
 });

@@ -5,9 +5,12 @@ const sequelize = require("../db_instance");
 const employee = sequelize.define("employee", {
     id: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true, 
+        primaryKey: true,
+        autoIncrement: true
+      },
+    rfid: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
     firstName: {
         type: Sequelize.STRING,
@@ -21,10 +24,7 @@ const employee = sequelize.define("employee", {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    rfid:{
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
+    
     level: {
         type: Sequelize.STRING,
         defaultValue: "normal",

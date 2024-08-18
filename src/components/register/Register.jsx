@@ -3,6 +3,8 @@ import './Register.css'
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import WebSocketComponent from '../WebSocketComponent';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -25,19 +27,35 @@ const Register = () => {
     const handleWebSocketData = (data) => {
         setFormState((prevState) => ({
             ...prevState,
-            id: data 
+            rfid: data 
         }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        Axios.post("http://localhost:8085/api/v1/employee/register", formState)
+        if (!formState.firstName || !formState.lastName || !formState.password || !formState.rfid) {
+            toast.error("กรุณากรอกข้อมูลให้ครบถ้วน");
+            return;
+        }
+        Axios.post("http://localhost:8085/api/v1/rfid/check-rfid", { rfid: formState.rfid })
             .then(response => {
-                alert(JSON.stringify(response.data));
+                if (response.data.exists) {
+                    toast.error("RFID นี้ถูกใช้ไปแล้ว กรุณาใช้บัตรอื่น",{ autoClose: 1000 });
+                } else {
+                    // ถ้า RFID ไม่ซ้ำ ให้ดำเนินการลงทะเบียน
+                    Axios.post("http://localhost:8085/api/v1/employee/register", formState)
+                        .then(response => {
+                            toast.success("ลงทะเบียนสำเร็จ",{ autoClose: 1000 });
+                        })
+                        .catch(error => {
+                            console.error("Error during registration:", error);
+                            toast.error("Register fail try again",{ autoClose: 1000 });
+                        });
+                }
             })
             .catch(error => {
-                console.error("Error during registration:", error);
-                alert("Register fail try again");
+                console.error("Error during RFID check:", error);
+                toast.alert("เกิดข้อผิดพลาดในการตรวจสอบ RFID");
             });
     };
 
@@ -58,7 +76,7 @@ const Register = () => {
                     type="text" 
                     id="rfid" 
                     name="rfid"
-                    value={formState.id} 
+                    value={formState.rfid} 
                     onChange={handleChange} 
                     readOnly 
                 /><br />
